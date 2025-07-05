@@ -23,11 +23,13 @@
         />
 
     <EditText
+        android:id="@+id/main_email"
         style="@style/edit_18"
         android:hint="Email"
         />
 
     <EditText
+        android:id="@+id/main_password"
         style="@style/edit_18"
         android:layout_marginTop="10dp"
         android:hint="Password"
@@ -49,6 +51,7 @@
         />
 
     <Button
+        android:id="@+id/main_signin"
         style="@style/button_20"
         app:backgroundTint="@null"
         android:layout_marginTop="30dp"

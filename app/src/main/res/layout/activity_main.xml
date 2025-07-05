@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        style="@style/text_30"
+        android:layout_marginTop="80dp"
+        android:text="Login Here"
+        android:textColor="#1E40BA"
+        />
+
+    <TextView
+        style="@style/text_30"
+        android:text="Welcome Back you've \nbeen Missed!"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="50dp"
+        />
+
+    <EditText
+        style="@style/edit_18"
+        android:hint="Email"
+        />
+
+    <EditText
+        style="@style/edit_18"
+        android:layout_marginTop="10dp"
+        android:hint="Password"
+        />
+
+    <TextView
+        style="@style/text_18"
+        android:text="Forget Your Password?"
+        android:layout_marginTop="30dp"
+        android:gravity="right"
+        android:textColor="#1E40BA"
+        />
+
+    <TextView
+        style="@style/text_18"
+        android:text="Create New Account"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        />
+
+    <Button
+        style="@style/button_20"
+        app:backgroundTint="@null"
+        android:layout_marginTop="30dp"
+        android:text="Sign In"
+        />
+</LinearLayout>

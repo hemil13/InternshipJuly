@@ -1,9 +1,11 @@
 package com.example.internshipjuly;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -19,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
     EditText email, password;
     Button signin;
 
+    TextView create_account;
+
+    String email_pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         email = findViewById(R.id.main_email);
         password = findViewById(R.id.main_password);
         signin = findViewById(R.id.main_signin);
+        create_account = findViewById(R.id.main_create_account);
 
 
         signin.setOnClickListener(new View.OnClickListener() {
@@ -34,14 +41,27 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(email.getText().toString().trim().equals("")){
                     email.setError("Enter Email");
-                }
-                else if(password.getText().toString().trim().equals("")){
+                } else if (!email.getText().toString().matches(email_pattern)) {
+                    email.setError("Enter A Valid Email");
+
+                } else if(password.getText().toString().trim().equals("")){
                     password.setError("Enter Password");
+                } else if (password.getText().toString().length()<6) {
+                    password.setError("Minimum 6 Characters");
+                } else{
+                    Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
+//                    Snackbar.make(view, "Login Successful", Snackbar.LENGTH_LONG).show();
                 }
-                else{
-                    Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                    Snackbar.make(view, "Login Successful", Snackbar.LENGTH_LONG).show();
-                }
+            }
+        });
+
+
+
+        create_account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+                startActivity(intent);
             }
         });
 

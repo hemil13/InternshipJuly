@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -8,79 +8,89 @@
     android:orientation="vertical"
     tools:context=".SignupActivity">
 
-    <TextView
-        style="@style/text_30"
-        android:layout_marginTop="80dp"
-        android:text="Create Account"
-        android:textColor="#1E40BA"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
-    <TextView
-        style="@style/text_30"
-        android:text="Create Account so you can explore all existing Jobs"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="50dp"
-        android:textSize="20dp"
-        />
+        <TextView
+            style="@style/text_30"
+            android:layout_marginTop="@dimen/_80sdp"
+            android:text="Create Account"
+            android:textColor="#1E40BA"
+            />
 
-
-    <EditText
-        android:id="@+id/signup_name"
-        style="@style/edit_18"
-        android:hint="Name"
-        />
-
-    <EditText
-        android:id="@+id/signup_email"
-        style="@style/edit_18"
-        android:hint="Email"
-        android:layout_marginTop="10dp"
-        android:inputType="textEmailAddress"
-        />
-
-    <EditText
-        android:id="@+id/signup_contact"
-        style="@style/edit_18"
-        android:hint="Contact"
-        android:layout_marginTop="10dp"
-        android:inputType="phone"
-        android:maxLength="10"
-        />
+        <TextView
+            style="@style/text_30"
+            android:text="Create Account so you can explore all existing Jobs"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/_50sdp"
+            android:textSize="@dimen/_20sdp"
+            />
 
 
+        <EditText
+            android:id="@+id/signup_name"
+            style="@style/edit_18"
+            android:hint="Name"
+            />
 
+        <EditText
+            android:id="@+id/signup_email"
+            style="@style/edit_18"
+            android:hint="Email"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:inputType="textEmailAddress"
+            />
 
-    <EditText
-        android:id="@+id/signup_password"
-        style="@style/edit_18"
-        android:layout_marginTop="10dp"
-        android:hint="Password"
-        android:inputType="textPassword"
-        />
-
-    <EditText
-        android:id="@+id/signup_cnfpassword"
-        style="@style/edit_18"
-        android:layout_marginTop="10dp"
-        android:hint="Confirm Password"
-        android:inputType="textPassword"
-        />
+        <EditText
+            android:id="@+id/signup_contact"
+            style="@style/edit_18"
+            android:hint="Contact"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:inputType="phone"
+            android:maxLength="10"
+            />
 
 
 
-    <TextView
-        android:id="@+id/signup_already_account"
-        style="@style/text_18"
-        android:text="Already Have An Account?"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        />
 
-    <Button
-        android:id="@+id/signup_button"
-        style="@style/button_20"
-        app:backgroundTint="@null"
-        android:layout_marginTop="30dp"
-        android:text="Sign Up"
-        />
-</LinearLayout>
+        <EditText
+            android:id="@+id/signup_password"
+            style="@style/edit_18"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            />
+
+        <EditText
+            android:id="@+id/signup_cnfpassword"
+            style="@style/edit_18"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            />
+
+
+
+        <TextView
+            android:id="@+id/signup_already_account"
+            style="@style/text_18"
+            android:text="Already Have An Account?"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:gravity="center"
+            />
+
+        <Button
+            android:id="@+id/signup_button"
+            style="@style/button_20"
+            app:backgroundTint="@null"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:text="Sign Up"
+            android:layout_marginBottom="@dimen/_30sdp"
+            />
+    </LinearLayout>
+
+
+</ScrollView>

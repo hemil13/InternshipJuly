@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     EditText email, password;
     Button signin;
 
-    TextView create_account;
+    TextView create_account, forget_password;
 
     String email_pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
 
@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         password = findViewById(R.id.main_password);
         signin = findViewById(R.id.main_signin);
         create_account = findViewById(R.id.main_create_account);
+        forget_password = findViewById(R.id.forget_password);
+
 
 
         signin.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +63,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        forget_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ForgetPasswordActivity.class);
                 startActivity(intent);
             }
         });

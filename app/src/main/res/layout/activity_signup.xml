@@ -29,7 +29,6 @@
             android:textSize="@dimen/_20sdp"
             />
 
-
         <EditText
             android:id="@+id/signup_name"
             style="@style/edit_18"

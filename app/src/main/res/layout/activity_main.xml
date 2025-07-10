@@ -30,7 +30,7 @@
         <EditText
             android:id="@+id/main_email"
             style="@style/edit_18"
-            android:hint="Email"
+            android:hint="Email or Contact"
             android:inputType="textEmailAddress"
             />
 

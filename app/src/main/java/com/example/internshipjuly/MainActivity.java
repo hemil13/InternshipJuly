@@ -1,6 +1,8 @@
 package com.example.internshipjuly;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,12 +25,18 @@ public class MainActivity extends AppCompatActivity {
 
     TextView create_account, forget_password;
 
+    SQLiteDatabase db;
+
     String email_pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        db = openOrCreateDatabase("InternshipJuly.db", MODE_PRIVATE, null);
+        String userTable = "CREATE TABLE IF NOT EXISTS user(userid INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(50), email VARCHAR(100), contact VARCHAR(15), password VARCHAR(10))";
+        db.execSQL(userTable);
 
         email = findViewById(R.id.main_email);
         password = findViewById(R.id.main_password);
@@ -43,15 +51,29 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(email.getText().toString().trim().equals("")){
                     email.setError("Enter Email");
-                } else if (!email.getText().toString().matches(email_pattern)) {
-                    email.setError("Enter A Valid Email");
-
                 } else if(password.getText().toString().trim().equals("")){
                     password.setError("Enter Password");
                 } else if (password.getText().toString().length()<6) {
                     password.setError("Minimum 6 Characters");
                 } else{
-                    Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
+
+                    String checkUser = "SELECT * FROM user WHERE (email = '"+email.getText().toString()+"' OR contact = '"+email.getText().toString()+"') AND password = '"+password.getText().toString()+"'";
+                    Cursor cursor = db.rawQuery(checkUser, null);
+
+                    if(cursor.getCount()>0){
+                        Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(MainActivity.this, "Invalid Credentials", Toast.LENGTH_LONG).show();
+//                        Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+//                        startActivity(intent);
+                    }
+
+
+
+
 //                    Snackbar.make(view, "Login Successful", Snackbar.LENGTH_LONG).show();
                 }
             }

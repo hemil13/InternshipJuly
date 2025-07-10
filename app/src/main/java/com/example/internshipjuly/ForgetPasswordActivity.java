@@ -1,5 +1,7 @@
 package com.example.internshipjuly;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,11 +18,16 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     EditText email, password, cnfpassword;
     Button update_password;
     String email_pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
+
+        db = openOrCreateDatabase("InternshipJuly.db", MODE_PRIVATE, null);
+        String userTable = "CREATE TABLE IF NOT EXISTS user(userid INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(50), email VARCHAR(100), contact VARCHAR(15), password VARCHAR(10))";
+        db.execSQL(userTable);
 
         email = findViewById(R.id.change_email);
         password = findViewById(R.id.new_password);
@@ -48,8 +55,25 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                     cnfpassword.setError("Password Not Matched");
                 }
                 else {
-                    Toast.makeText(ForgetPasswordActivity.this, "Password Changed Successful", Toast.LENGTH_LONG).show();
-                    onBackPressed();
+
+
+                    String checkEmail = "SELECT * FROM user WHERE email = '"+email.getText().toString()+"'";
+                    Cursor cursor = db.rawQuery(checkEmail, null);
+
+                    if(cursor.getCount()>0){
+                        String updatePassword = "UPDATE user SET password = '"+password.getText().toString()+"' WHERE email = '"+email.getText().toString()+"'";
+                        db.execSQL(updatePassword);
+
+                        Toast.makeText(ForgetPasswordActivity.this, "Password Changed Successful", Toast.LENGTH_LONG).show();
+                        onBackPressed();
+                    }
+                    else{
+                        Toast.makeText(ForgetPasswordActivity.this, "Invalid Email", Toast.LENGTH_SHORT).show();
+                    }
+
+
+
+
 //                    Intent intent = new Intent(SignupActivity.this, MainActivity.class);
 //                    startActivity(intent);
                 }

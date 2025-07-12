@@ -1,6 +1,7 @@
 package com.example.internshipjuly;
 
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ public class ProfileActivity extends AppCompatActivity {
     EditText name, email, contact, password, cnfpassword;
 
     SharedPreferences sp;
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,10 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         sp = getSharedPreferences(ConstantSp.pref, MODE_PRIVATE);
+
+        db = openOrCreateDatabase("InternshipJuly.db", MODE_PRIVATE, null);
+        String userTable = "CREATE TABLE IF NOT EXISTS user(userid INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(50), email VARCHAR(100), contact VARCHAR(15), password VARCHAR(10))";
+        db.execSQL(userTable);
 
         edit = findViewById(R.id.profile_edit);
         update = findViewById(R.id.profile_update);
@@ -48,6 +54,10 @@ public class ProfileActivity extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                String updateProfile = "UPDATE user SET name = '"+name.getText().toString()+"', email = '"+email.getText().toString()+"', contact = '"+contact.getText().toString()+"', password = '"+password.getText().toString()+"' WHERE userid = '"+sp.getString(ConstantSp.userid,"")+"'";
+                db.execSQL(updateProfile);
+
                 cnfpassword.setVisibility(View.GONE);
                 edit.setVisibility(View.VISIBLE);
                 update.setVisibility(View.GONE);

@@ -58,6 +58,12 @@ public class ProfileActivity extends AppCompatActivity {
                 String updateProfile = "UPDATE user SET name = '"+name.getText().toString()+"', email = '"+email.getText().toString()+"', contact = '"+contact.getText().toString()+"', password = '"+password.getText().toString()+"' WHERE userid = '"+sp.getString(ConstantSp.userid,"")+"'";
                 db.execSQL(updateProfile);
 
+                sp.edit().putString(ConstantSp.name, name.getText().toString()).commit();
+                sp.edit().putString(ConstantSp.email, email.getText().toString()).commit();
+                sp.edit().putString(ConstantSp.contact, contact.getText().toString()).commit();
+                sp.edit().putString(ConstantSp.password, password.getText().toString()).commit();
+
+
                 cnfpassword.setVisibility(View.GONE);
                 edit.setVisibility(View.VISIBLE);
                 update.setVisibility(View.GONE);

@@ -21,7 +21,8 @@
             />
         <TextView
             android:id="@+id/category_text"
-            style="@style/text_30"
+            style="@style/text_18"
+            android:gravity="center"
             />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

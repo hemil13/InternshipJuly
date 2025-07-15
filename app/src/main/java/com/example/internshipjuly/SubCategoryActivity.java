@@ -34,7 +34,6 @@ public class SubCategoryActivity extends AppCompatActivity {
         subcategory_recycler.setLayoutManager(new LinearLayoutManager(SubCategoryActivity.this));
         subcategory_recycler.setItemAnimator(new DefaultItemAnimator());
 
-
         SubCategoryAdapter adapter = new SubCategoryAdapter(SubCategoryActivity.this, subCategoryIdArray, categoryIdArray, imageArray, nameArray);
         subcategory_recycler.setAdapter(adapter);
 

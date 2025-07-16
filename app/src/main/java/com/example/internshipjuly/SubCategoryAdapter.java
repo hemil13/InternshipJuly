@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.MyHolder> {
 
     Context context;
@@ -19,14 +21,27 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     int[] imageArray;
     String[] nameArray;
 
+    ArrayList<SubcategoryList> arrayList;
+
     SharedPreferences sp;
 
-    public SubCategoryAdapter(Context context, int[] subCategoryIdArray, int[] categoryIdArray, int[] imageArray, String[] nameArray) {
+
+
+//    public SubCategoryAdapter(Context context, int[] subCategoryIdArray, int[] categoryIdArray, int[] imageArray, String[] nameArray) {
+//        this.context = context;
+//        this.subCategoryIdArray = subCategoryIdArray;
+//        this.categoryIdArray = categoryIdArray;
+//        this.imageArray = imageArray;
+//        this.nameArray = nameArray;
+//        sp = context.getSharedPreferences(ConstantSp.pref, Context.MODE_PRIVATE);
+//    }
+
+
+
+    public SubCategoryAdapter(Context context, ArrayList<SubcategoryList> arrayList) {
         this.context = context;
-        this.subCategoryIdArray = subCategoryIdArray;
-        this.categoryIdArray = categoryIdArray;
-        this.imageArray = imageArray;
-        this.nameArray = nameArray;
+        this.arrayList = arrayList;
+
         sp = context.getSharedPreferences(ConstantSp.pref, Context.MODE_PRIVATE);
     }
 
@@ -50,14 +65,19 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     @Override
     public void onBindViewHolder(@NonNull SubCategoryAdapter.MyHolder holder, int position) {
 
-        if(categoryIdArray[position] == Integer.parseInt(sp.getString(ConstantSp.categoryid,""))){
-            holder.image.setImageResource(imageArray[position]);
-            holder.text.setText(nameArray[position]);
-        }
+//        if(categoryIdArray[position] == Integer.parseInt(sp.getString(ConstantSp.categoryid,""))){
+//
+//            holder.image.setImageResource(imageArray[position]);
+//            holder.text.setText(nameArray[position]);
+//        }
+
+        holder.image.setImageResource(arrayList.get(position).getImage());
+        holder.text.setText(arrayList.get(position).getName());
+
     }
 
     @Override
     public int getItemCount() {
-        return subCategoryIdArray.length;
+        return arrayList.size();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.internshipjuly;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -10,6 +11,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 public class SubCategoryActivity extends AppCompatActivity {
 
@@ -24,17 +27,41 @@ public class SubCategoryActivity extends AppCompatActivity {
 
     RecyclerView subcategory_recycler;
 
+    SharedPreferences sp;
+
+    ArrayList<SubcategoryList> arrayList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_category);
+
+        sp = getSharedPreferences(ConstantSp.pref, MODE_PRIVATE);
 
         subcategory_recycler = findViewById(R.id.subcategory_recycler);
 
         subcategory_recycler.setLayoutManager(new LinearLayoutManager(SubCategoryActivity.this));
         subcategory_recycler.setItemAnimator(new DefaultItemAnimator());
 
-        SubCategoryAdapter adapter = new SubCategoryAdapter(SubCategoryActivity.this, subCategoryIdArray, categoryIdArray, imageArray, nameArray);
+
+        arrayList = new ArrayList<>();
+        for(int i=0; i<subCategoryIdArray.length;i++){
+            if(categoryIdArray[i] == Integer.parseInt(sp.getString(ConstantSp.categoryid,""))){
+                SubcategoryList list = new SubcategoryList();
+                list.setSubcategoryId(subCategoryIdArray[i]);
+                list.setCategoryId(categoryIdArray[i]);
+                list.setImage(imageArray[i]);
+                list.setName(nameArray[i]);
+                arrayList.add(list);
+            }
+        }
+//
+//        SubCategoryAdapter adapter = new SubCategoryAdapter(SubCategoryActivity.this, subCategoryIdArray, categoryIdArray, imageArray, nameArray);
+//        subcategory_recycler.setAdapter(adapter);
+
+
+
+        SubCategoryAdapter adapter = new SubCategoryAdapter(SubCategoryActivity.this, arrayList);
         subcategory_recycler.setAdapter(adapter);
 
 

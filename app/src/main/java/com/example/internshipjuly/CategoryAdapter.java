@@ -14,19 +14,31 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyHolder> {
 
     Context Context;
     int[] idArray;
     int[] imageArray;
     String[] nameArray;
+
+    ArrayList<CategoryList> arrayList;
     SharedPreferences sp;
 
-    public CategoryAdapter(Context Context, int[] idArray, int[] imageArray, String[] nameArray) {
+//    public CategoryAdapter(Context Context, int[] idArray, int[] imageArray, String[] nameArray) {
+//        this.Context = Context;
+//        this.idArray = idArray;
+//        this.imageArray = imageArray;
+//        this.nameArray = nameArray;
+//
+//        sp = Context.getSharedPreferences(ConstantSp.pref, MODE_PRIVATE);
+//    }
+
+
+    public CategoryAdapter(Context Context, ArrayList<CategoryList> arrayList) {
         this.Context = Context;
-        this.idArray = idArray;
-        this.imageArray = imageArray;
-        this.nameArray = nameArray;
+        this.arrayList = arrayList;
 
         sp = Context.getSharedPreferences(ConstantSp.pref, MODE_PRIVATE);
     }
@@ -51,24 +63,29 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyHold
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.MyHolder holder, int position) {
-        holder.image.setImageResource(imageArray[position]);
-        holder.text.setText(nameArray[position]);
+//        holder.image.setImageResource(imageArray[position]);
+//        holder.text.setText(nameArray[position]);
+
+
+        holder.image.setImageResource(arrayList.get(position).getImage());
+        holder.text.setText(arrayList.get(position).getName());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                sp.edit().putString(ConstantSp.categoryid, String.valueOf(idArray[position])).commit();
+//                sp.edit().putString(ConstantSp.categoryid, String.valueOf(idArray[position])).commit();
+
+                sp.edit().putString(ConstantSp.categoryid, String.valueOf(arrayList.get(position).getCategoryId())).commit();
 
                 Intent intent = new Intent(Context, SubCategoryActivity.class);
                 Context.startActivity(intent);
             }
         });
-
     }
 
     @Override
     public int getItemCount() {
-        return idArray.length;
+        return arrayList.size();
     }
 }

@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import java.util.ArrayList;
+
 public class CategoryActivity extends AppCompatActivity {
 
     int[] idArray = {1,2,3};
@@ -18,6 +20,8 @@ public class CategoryActivity extends AppCompatActivity {
     String[] nameArray = {"Electronics","Clothes","Books"};
 
     RecyclerView category_recycler;
+
+    ArrayList<CategoryList> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,20 @@ public class CategoryActivity extends AppCompatActivity {
 //        category_recycler.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL));
         category_recycler.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 
-        CategoryAdapter adapter = new CategoryAdapter(CategoryActivity.this, idArray, imageArray, nameArray);
+        arrayList = new ArrayList<>();
+
+        for(int i =0; i<idArray.length; i++){
+            CategoryList list = new CategoryList();
+            list.setCategoryId(idArray[i]);
+            list.setImage(imageArray[i]);
+            list.setName(nameArray[i]);
+            arrayList.add(list);
+        }
+
+//        CategoryAdapter adapter = new CategoryAdapter(CategoryActivity.this, idArray, imageArray, nameArray);
+//        category_recycler.setAdapter(adapter);
+
+        CategoryAdapter adapter = new CategoryAdapter(CategoryActivity.this, arrayList);
         category_recycler.setAdapter(adapter);
 
 

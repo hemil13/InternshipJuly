@@ -1,15 +1,6 @@
 package com.example.internshipjuly;
 
-public class SubcategoryList {
-
-    public int getSubcategoryId() {
-        return subcategoryId;
-    }
-
-    public void setSubcategoryId(int subcategoryId) {
-        this.subcategoryId = subcategoryId;
-    }
-
+public class CategoryList {
     public int getCategoryId() {
         return categoryId;
     }
@@ -34,6 +25,6 @@ public class SubcategoryList {
         this.name = name;
     }
 
-    int subcategoryId, categoryId, image;
+    int categoryId, image;
     String name;
 }

@@ -12,4 +12,8 @@ public class ConstantSp {
 
     public static final String categoryid = "CATEGORYID";
 
+    public static final String subcategoryid = "SUBCATEGORYID";
+
+    public static final String rupees = "₹";
+
 }

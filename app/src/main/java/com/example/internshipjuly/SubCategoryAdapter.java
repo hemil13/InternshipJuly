@@ -74,6 +74,8 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
         holder.image.setImageResource(arrayList.get(position).getImage());
         holder.text.setText(arrayList.get(position).getName());
 
+
+
     }
 
     @Override
